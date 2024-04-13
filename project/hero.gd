@@ -4,6 +4,8 @@ const SPEED := 20.0
 const ACCELERATION := 1.0
 const SATELLITE_SCENE := preload("res://satellite.tscn")
 
+@onready var _satellites := $Satellites
+
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_down", "move_up")
 	var vector := Vector3(direction.x, 0, -direction.y).normalized()
@@ -14,12 +16,15 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("summon"):
-		# Summon a pair for fun
+		# Move all the other ones out a unit
+		for satellite in _satellites.get_children():
+			satellite.orbital += 1
+		
 		var satellite_1 := SATELLITE_SCENE.instantiate()
-		add_child(satellite_1)
+		_satellites.add_child(satellite_1)
 		var satellite_2 := SATELLITE_SCENE.instantiate()
 		satellite_2.angle = PI
-		add_child(satellite_2)
+		_satellites.add_child(satellite_2)
 
 
 func charge() -> void:
