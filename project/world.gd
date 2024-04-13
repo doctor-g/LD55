@@ -1,16 +1,19 @@
 extends Node3D
 
 const SPAWN_DISTANCE := 25.0 # Should be offscreen for all
+const SECONDS_PER_SPAWN_DECAY_PER_SPAWN := 0.1
 
-var _time_to_next_spawn := 2.0
+var _seconds_per_spawn := 2.0
+var _time_to_next_spawn := 0.0
 var _ready_to_play_again := false
 
 func _physics_process(delta: float) -> void:
 	_time_to_next_spawn -= delta
 	
-	if _time_to_next_spawn <= 0:
+	if _time_to_next_spawn <= 0 and $Hero.alive:
 		_spawn_enemies()
-		_time_to_next_spawn = 2.0
+		_time_to_next_spawn = _seconds_per_spawn
+		_seconds_per_spawn -= SECONDS_PER_SPAWN_DECAY_PER_SPAWN
 
 
 func _spawn_enemies() -> void:
@@ -24,6 +27,7 @@ func _spawn_enemies() -> void:
 func _on_hero_death_finished() -> void:
 	%PlayAgainLabel.visible = true
 	_ready_to_play_again = true
+
 
 func _input(event: InputEvent) -> void:
 	if _ready_to_play_again and event is InputEventKey and event.is_pressed():
