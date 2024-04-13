@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dh5hoos1cp7mn"]
+[gd_scene load_steps=9 format=3 uid="uid://dh5hoos1cp7mn"]
 
 [ext_resource type="PackedScene" uid="uid://chgdlfcyb06pk" path="res://hero.tscn" id="1_ejil5"]
+[ext_resource type="Script" path="res://world.gd" id="1_fbrej"]
 [ext_resource type="PackedScene" uid="uid://b77yhh5ub87hw" path="res://enemy.tscn" id="2_83wmn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r76qj"]
@@ -21,6 +22,7 @@ reflected_light_source = 1
 size = Vector3(1, 10, 1000)
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_fbrej")
 
 [node name="Hero" parent="." instance=ExtResource("1_ejil5")]
 

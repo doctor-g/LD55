@@ -9,6 +9,7 @@ albedo_color = Color(0.737255, 0.0196078, 0, 1)
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_ewhv8")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
