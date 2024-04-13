@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
-const ACCELERATION := 3.0
+const DELTA_TOWARD := 3.0
 const CHARGE_DROP_DISTANCE := 3.0
+
+## Speed increase per second
+const ACCELERATION := 0.5
 
 @export var speed := 7.0
 @export var target : Node3D
@@ -9,10 +12,12 @@ const CHARGE_DROP_DISTANCE := 3.0
 var _direction := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
+	speed += ACCELERATION * delta
+	
 	if target != null:
 		var new_direction := (target.global_position - global_position).normalized()
 		
-		_direction = _direction.move_toward(new_direction, ACCELERATION * delta)
+		_direction = _direction.move_toward(new_direction, DELTA_TOWARD * delta)
 		
 		var collision := move_and_collide(_direction * speed * delta)
 		if collision != null and collision.get_collider() == target:
