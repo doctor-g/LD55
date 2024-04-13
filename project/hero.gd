@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 		add_child(satellite_2)
 
 
+func charge() -> void:
+	print("Charging up!")
+
 
 func damage() -> void:
 	print("OUCH")

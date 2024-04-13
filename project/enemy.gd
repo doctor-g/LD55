@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const ACCELERATION := 3.0
+const CHARGE_DROP_DISTANCE := 3.0
 
 @export var speed := 7.0
 @export var target : Node3D
@@ -19,5 +20,9 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 
 
-func damage() -> void:
+func damage(cause : Node3D) -> void:
+	var charge := preload("res://charge.tscn").instantiate()
+	add_sibling(charge)
+	charge.global_position = global_position
+	charge.target_position = global_position + (global_position - cause.global_position).normalized() * CHARGE_DROP_DISTANCE
 	queue_free()

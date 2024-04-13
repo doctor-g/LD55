@@ -13,5 +13,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	# Only enemies can trigger this, so damage them and remove the satellite
-	body.damage()
+	body.damage(self)
 	queue_free()
