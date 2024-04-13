@@ -10,6 +10,12 @@ var _seconds_to_next_spawn := 0.0
 var _elapsed_seconds := 0.0
 var _ready_to_play_again := false
 
+
+func _ready() -> void:
+	# If this was left visible during editing, turn it off
+	%PlayAgainLabel.visible = false
+
+
 func _physics_process(delta: float) -> void:
 	_elapsed_seconds += delta
 	_seconds_to_next_spawn -= delta
@@ -35,4 +41,7 @@ func _on_hero_death_finished() -> void:
 
 func _input(event: InputEvent) -> void:
 	if _ready_to_play_again and event is InputEventKey and event.is_pressed():
-		get_tree().change_scene_to_file("res://world.tscn")
+		if event.keycode == KEY_SPACE:
+			get_tree().change_scene_to_file("res://world.tscn")
+		else:
+			get_tree().change_scene_to_file("res://title_screen.tscn")
