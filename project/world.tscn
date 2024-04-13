@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh5hoos1cp7mn"]
+[gd_scene load_steps=13 format=3 uid="uid://dh5hoos1cp7mn"]
 
 [ext_resource type="PackedScene" uid="uid://chgdlfcyb06pk" path="res://hero.tscn" id="1_ejil5"]
 [ext_resource type="Script" path="res://world.gd" id="1_fbrej"]
+[ext_resource type="Curve" uid="uid://8qk4l6dfb15x" path="res://spawn_rate.tres" id="2_1fin0"]
 [ext_resource type="PackedScene" uid="uid://b77yhh5ub87hw" path="res://enemy.tscn" id="2_83wmn"]
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="4_h8po8"]
 [ext_resource type="AudioStream" uid="uid://cikl83523lp5p" path="res://theme.ogg" id="5_1wi3g"]
@@ -29,6 +30,7 @@ font_size = 48
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_fbrej")
+spawn_rate = ExtResource("2_1fin0")
 
 [node name="Hero" parent="." instance=ExtResource("1_ejil5")]
 

@@ -3,17 +3,21 @@ extends Node3D
 const SPAWN_DISTANCE := 25.0 # Should be offscreen for all
 const SECONDS_PER_SPAWN_DECAY_PER_SPAWN := 0.1
 
-var _seconds_per_spawn := 2.0
-var _time_to_next_spawn := 0.0
+@export var spawn_rate : Curve
+@export var seconds_until_max_spawn_rate := 30.0
+
+var _seconds_to_next_spawn := 0.0
+var _elapsed_seconds := 0.0
 var _ready_to_play_again := false
 
 func _physics_process(delta: float) -> void:
-	_time_to_next_spawn -= delta
+	_elapsed_seconds += delta
+	_seconds_to_next_spawn -= delta
 	
-	if _time_to_next_spawn <= 0 and $Hero.alive:
+	if _seconds_to_next_spawn <= 0 and $Hero.alive:
 		_spawn_enemies()
-		_time_to_next_spawn = _seconds_per_spawn
-		_seconds_per_spawn -= SECONDS_PER_SPAWN_DECAY_PER_SPAWN
+		var spawns_per_second := spawn_rate.sample(_elapsed_seconds / seconds_until_max_spawn_rate)
+		_seconds_to_next_spawn = 1.0 / spawns_per_second
 
 
 func _spawn_enemies() -> void:
