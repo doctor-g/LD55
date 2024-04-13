@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh5hoos1cp7mn"]
+[gd_scene load_steps=8 format=3 uid="uid://dh5hoos1cp7mn"]
 
 [ext_resource type="PackedScene" uid="uid://chgdlfcyb06pk" path="res://hero.tscn" id="1_ejil5"]
 [ext_resource type="PackedScene" uid="uid://b77yhh5ub87hw" path="res://enemy.tscn" id="2_83wmn"]
@@ -17,11 +17,14 @@ ambient_light_source = 2
 ambient_light_color = Color(0.866667, 0.905882, 0.878431, 1)
 reflected_light_source = 1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuge0"]
+size = Vector3(1, 10, 1000)
+
 [node name="World" type="Node3D"]
 
 [node name="Hero" parent="." instance=ExtResource("1_ejil5")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Background" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.0459, 0)
 size = Vector3(1000, 1, 1000)
 material = SubResource("StandardMaterial3D_mi4xh")
@@ -32,3 +35,39 @@ environment = SubResource("Environment_00kh6")
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_83wmn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -8)
 target = NodePath("../Hero")
+
+[node name="WestWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WestWall"]
+size = Vector3(1, 10, 1000)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall"]
+shape = SubResource("BoxShape3D_tuge0")
+
+[node name="EastWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="EastWall"]
+size = Vector3(1, 10, 1000)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall"]
+shape = SubResource("BoxShape3D_tuge0")
+
+[node name="SouthWall" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 500)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SouthWall"]
+size = Vector3(1, 10, 1000)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall"]
+shape = SubResource("BoxShape3D_tuge0")
+
+[node name="NorthWall" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -500)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NorthWall"]
+size = Vector3(1, 10, 1000)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall"]
+shape = SubResource("BoxShape3D_tuge0")
