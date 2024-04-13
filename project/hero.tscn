@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://chgdlfcyb06pk"]
+[gd_scene load_steps=16 format=3 uid="uid://chgdlfcyb06pk"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_8uykj"]
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="2_bot50"]
@@ -105,11 +105,15 @@ _data = {
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1svh"]
-albedo_color = Color(0.149317, 0.449044, 1, 1)
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.14902, 0.45098, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d5wck"]
 material = SubResource("StandardMaterial3D_b1svh")
 size = Vector2(0.2, 0.2)
+
+[sub_resource type="Gradient" id="Gradient_hu2rf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_8uykj")
@@ -162,3 +166,4 @@ initial_velocity_min = 2.0
 initial_velocity_max = 4.0
 angular_velocity_min = -5.0
 angular_velocity_max = 5.0
+color_ramp = SubResource("Gradient_hu2rf")
