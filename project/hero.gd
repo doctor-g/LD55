@@ -1,22 +1,30 @@
 extends CharacterBody3D
 
+signal death_finished
+
 const SPEED := 20.0
 const ACCELERATION := 1.0
 const SATELLITE_SCENE := preload("res://satellite.tscn")
 
+var alive := true
 var charges := 1:
 	set(value):
 		charges = value
 		_update_charges_label()
 
 
+@onready var _shell := $Shell
 @onready var _satellites := $Satellites
+
 
 func _ready() -> void:
 	_update_charges_label()
 
 
 func _physics_process(_delta: float) -> void:
+	if not alive:
+		return
+	
 	var direction := Input.get_vector("move_left", "move_right", "move_down", "move_up")
 	var vector := Vector3(direction.x, 0, -direction.y).normalized()
 	var target_velocity := vector * SPEED
@@ -39,12 +47,28 @@ func _physics_process(_delta: float) -> void:
 
 
 func charge() -> void:
+	if not alive: 
+		return
+	
 	charges += 1
 
 
 func damage() -> void:
-	print("OUCH")
+	if not alive:
+		return
+	
+	if _shell != null:
+		%ShellParticles.emitting = true
+		_shell.queue_free()
+	else:
+		alive = false
+		$AnimationPlayer.play("death")
 
 
 func _update_charges_label() -> void:
 	%ChargesLabel.text = "Charges: %d" % charges
+
+
+func _scale_to_zero() -> void:
+	await create_tween().tween_property($Heart, "scale", Vector3.ZERO, 1.0).finished
+	death_finished.emit()

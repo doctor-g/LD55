@@ -14,7 +14,7 @@ var _direction := Vector3.ZERO
 func _physics_process(delta: float) -> void:
 	speed += ACCELERATION * delta
 	
-	if target != null:
+	if target != null and target.alive:
 		var new_direction := (target.global_position - global_position).normalized()
 		
 		_direction = _direction.move_toward(new_direction, DELTA_TOWARD * delta)
@@ -30,4 +30,9 @@ func damage(cause : Node3D) -> void:
 	add_sibling(charge)
 	charge.global_position = global_position
 	charge.target_position = global_position + (global_position - cause.global_position).normalized() * CHARGE_DROP_DISTANCE
+	
+	var explosion := preload("res://enemy_explosion.tscn").instantiate()
+	add_sibling(explosion)
+	explosion.global_position = global_position
+	
 	queue_free()

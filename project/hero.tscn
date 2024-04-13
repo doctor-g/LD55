@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chgdlfcyb06pk"]
+[gd_scene load_steps=15 format=3 uid="uid://chgdlfcyb06pk"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_8uykj"]
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="2_bot50"]
@@ -12,7 +12,11 @@ seamless = true
 noise = SubResource("FastNoiseLite_n3gbn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymwut"]
+albedo_color = Color(0.14902, 0.45098, 1, 1)
 normal_texture = SubResource("NoiseTexture2D_8u6yp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25d3w"]
+albedo_color = Color(0.709804, 0.384314, 0.443137, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f57xk"]
 
@@ -20,11 +24,102 @@ normal_texture = SubResource("NoiseTexture2D_8u6yp")
 font = ExtResource("2_bot50")
 font_size = 64
 
+[sub_resource type="Animation" id="Animation_84dj6"]
+resource_name = "heartbeat"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 0.450625, 1.68179, 1.68179),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.8, 0.8, 0.8), Vector3(1.25, 1.25, 1.25), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ix158"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.709804, 0.384314, 0.443137, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_egfq0"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.709804, 0.384314, 0.443137, 1), Color(0.996078, 0.901961, 0.0352941, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_scale_to_zero"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_12jqy"]
+_data = {
+"RESET": SubResource("Animation_ix158"),
+"death": SubResource("Animation_egfq0"),
+"heartbeat": SubResource("Animation_84dj6")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1svh"]
+albedo_color = Color(0.149317, 0.449044, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d5wck"]
+material = SubResource("StandardMaterial3D_b1svh")
+size = Vector2(0.2, 0.2)
+
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_8uykj")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+[node name="Shell" type="CSGSphere3D" parent="."]
 material = SubResource("StandardMaterial3D_ymwut")
+
+[node name="Heart" type="CSGSphere3D" parent="."]
+radius = 0.35
+material = SubResource("StandardMaterial3D_25d3w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_f57xk")
@@ -43,3 +138,24 @@ offset_right = 71.0
 offset_bottom = 23.0
 text = "Charges: "
 label_settings = SubResource("LabelSettings_12g4h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_12jqy")
+}
+autoplay = "heartbeat"
+
+[node name="ShellParticles" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.9
+mesh = SubResource("PlaneMesh_d5wck")
+emission_shape = 2
+emission_sphere_radius = 0.5
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
