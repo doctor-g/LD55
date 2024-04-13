@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcsi3odxa3wse"]
+
+[ext_resource type="Script" path="res://satellite.gd" id="1_lo0a5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73ipg"]
+albedo_color = Color(0.894118, 0.92549, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x84og"]
+radius = 0.25
+
+[node name="Satellite" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_lo0a5")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.25
+material = SubResource("StandardMaterial3D_73ipg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_x84og")

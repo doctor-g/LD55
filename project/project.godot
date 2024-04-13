@@ -59,6 +59,11 @@ summon={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="hero"
+3d_physics/layer_2="satellites"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
