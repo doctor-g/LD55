@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://chgdlfcyb06pk"]
+[gd_scene load_steps=8 format=3 uid="uid://chgdlfcyb06pk"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_8uykj"]
+[ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="2_bot50"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n3gbn"]
 
@@ -14,6 +15,10 @@ noise = SubResource("FastNoiseLite_n3gbn")
 normal_texture = SubResource("NoiseTexture2D_8u6yp")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f57xk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_12g4h"]
+font = ExtResource("2_bot50")
+font_size = 64
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_8uykj")
@@ -37,3 +42,4 @@ unique_name_in_owner = true
 offset_right = 71.0
 offset_bottom = 23.0
 text = "Charges: "
+label_settings = SubResource("LabelSettings_12g4h")
