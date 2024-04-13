@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbg8pjxj65ugo"]
+[gd_scene load_steps=11 format=3 uid="uid://dbg8pjxj65ugo"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_v3u0h"]
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="1_xvgeh"]
 [ext_resource type="FontFile" uid="uid://cdlpr4pdum1mc" path="res://Kanit-Regular.ttf" id="3_blncy"]
 [ext_resource type="Script" path="res://nucleus.gd" id="4_87fgo"]
+[ext_resource type="AudioStream" uid="uid://bqg76s5cr45cf" path="res://title.ogg" id="5_6wsy1"]
 
 [sub_resource type="Theme" id="Theme_27kyf"]
 default_font = ExtResource("1_xvgeh")
@@ -149,6 +150,11 @@ root_node = NodePath("../UI")
 libraries = {
 "": SubResource("AnimationLibrary_utjhk")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6wsy1")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="meta_clicked" from="UI/Label" to="." method="_on_label_meta_clicked"]
