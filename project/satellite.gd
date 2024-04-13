@@ -1,5 +1,7 @@
 extends Area3D
 
+signal hit_enemy
+
 const SPEED := 5.0
 const ACCELERATION := 0.1
 const DISTANCE_PER_ORBITAL := 1.2
@@ -19,4 +21,5 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	# Only enemies can trigger this, so damage them and remove the satellite
 	body.damage(self)
+	hit_enemy.emit()
 	queue_free()

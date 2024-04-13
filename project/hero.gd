@@ -11,6 +11,10 @@ var charges := 1:
 	set(value):
 		charges = value
 		_update_charges_label()
+var score := 0:
+	set(value):
+		score = value
+		_update_score_label()
 
 
 @onready var _shell := $Shell
@@ -19,6 +23,7 @@ var charges := 1:
 
 func _ready() -> void:
 	_update_charges_label()
+	_update_score_label()
 
 
 func _physics_process(_delta: float) -> void:
@@ -39,11 +44,14 @@ func _physics_process(_delta: float) -> void:
 		for satellite in _satellites.get_children():
 			satellite.orbital += 1
 		
-		var satellite_1 := SATELLITE_SCENE.instantiate()
-		_satellites.add_child(satellite_1)
-		var satellite_2 := SATELLITE_SCENE.instantiate()
-		satellite_2.angle = PI
-		_satellites.add_child(satellite_2)
+		for i in 2:
+			var satellite := SATELLITE_SCENE.instantiate()
+			_satellites.add_child(satellite)
+			satellite.angle = PI * i
+			satellite.hit_enemy.connect(func():
+				if alive:
+					score += 10
+			)
 		
 		$SummonSound.play()
 
@@ -53,6 +61,7 @@ func charge() -> void:
 		return
 	
 	charges += 1
+	score += 5
 	$PickupSound.play()
 
 
@@ -71,7 +80,11 @@ func damage() -> void:
 
 
 func _update_charges_label() -> void:
-	%ChargesLabel.text = "Charges: %d" % charges
+	%ChargesLabel.text = "Charges\n%d" % charges
+	
+
+func _update_score_label() -> void:
+	%ScoreLabel.text = "Score\n%d" % score
 
 
 func _scale_to_zero() -> void:
