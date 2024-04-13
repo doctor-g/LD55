@@ -1,5 +1,7 @@
 # Orbitals
 
+[Play now!](https://doctor-g.github.io/LD55/)
+
 Made for Ludum Dare 55 with the theme &ldquo;Summoning&rdquo;
 
 ## Legal
