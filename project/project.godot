@@ -10,7 +10,10 @@ config_version=5
 
 [application]
 
-config/name="LD55"
+config/name="Orbitals"
+config/description="A game made for Ludum Dare 55
+
+Copyright 2024 Paul Gestwicki"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -70,3 +73,4 @@ summon={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.352941, 0.207843, 0.541176, 1)

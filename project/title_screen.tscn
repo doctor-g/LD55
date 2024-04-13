@@ -1,6 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbg8pjxj65ugo"]
+[gd_scene load_steps=10 format=3 uid="uid://dbg8pjxj65ugo"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_v3u0h"]
+[ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="1_xvgeh"]
+[ext_resource type="FontFile" uid="uid://cdlpr4pdum1mc" path="res://Kanit-Regular.ttf" id="3_blncy"]
+[ext_resource type="Script" path="res://nucleus.gd" id="4_87fgo"]
+
+[sub_resource type="Theme" id="Theme_27kyf"]
+default_font = ExtResource("1_xvgeh")
+default_font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6axt"]
+albedo_color = Color(0.894118, 0.92549, 0, 1)
 
 [sub_resource type="Animation" id="Animation_pi234"]
 length = 0.001
@@ -38,33 +48,74 @@ _data = {
 "fade_out": SubResource("Animation_1jko2")
 }
 
-[node name="TitleScreen" type="Control"]
+[node name="TitleScreen" type="Node3D"]
+script = ExtResource("1_v3u0h")
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v3u0h")
+theme = SubResource("Theme_27kyf")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 509.0
-offset_top = 518.0
-offset_right = 605.0
-offset_bottom = 541.0
-text = "Game Name"
+[node name="TitleLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -39.0
+offset_right = 191.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "Orbitals"
+horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="UI"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 537.0
-offset_top = 605.0
-offset_right = 593.0
-offset_bottom = 636.0
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = 98.0
+offset_right = 74.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Play"
 
-[node name="Overlay" type="ColorRect" parent="."]
+[node name="Label" type="RichTextLabel" parent="UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -147.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 0.721569, 1)
+theme_override_fonts/normal_font = ExtResource("3_blncy")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]A game by Paul Gestwicki
+Made for Ludum Dare 55—Summoning
+[url]https://github.com/doctor-g/LD55[/url][/center]"
+fit_content = true
+autowrap_mode = 0
+meta_underlined = false
+
+[node name="Overlay" type="ColorRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,9 +125,30 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.56239, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.02615, 0)
+
+[node name="Nucleus" type="Node3D" parent="."]
+script = ExtResource("4_87fgo")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Nucleus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0921)
+radius = 0.25
+material = SubResource("StandardMaterial3D_m6axt")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Nucleus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.092)
+radius = 0.25
+material = SubResource("StandardMaterial3D_m6axt")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../UI")
 libraries = {
 "": SubResource("AnimationLibrary_utjhk")
 }
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="meta_clicked" from="UI/Label" to="." method="_on_label_meta_clicked"]
