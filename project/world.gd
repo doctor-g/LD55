@@ -45,3 +45,7 @@ func _input(event: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://world.tscn")
 		else:
 			get_tree().change_scene_to_file("res://title_screen.tscn")
+
+
+func _on_hero_summoned_satellites() -> void:
+	create_tween().tween_property(%Instructions, "modulate:a", 0, 0.5)

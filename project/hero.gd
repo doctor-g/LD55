@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal summoned_satellites
 signal death_finished
 
 const SPEED := 20.0
@@ -54,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 			)
 		
 		$SummonSound.play()
+		summoned_satellites.emit()
 
 
 func charge() -> void:

@@ -100,9 +100,26 @@ Any other key to return to title"
 label_settings = SubResource("LabelSettings_jgmt4")
 horizontal_alignment = 1
 
+[node name="Instructions" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -370.5
+offset_top = -59.0
+offset_right = 370.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space"
+label_settings = SubResource("LabelSettings_jgmt4")
+horizontal_alignment = 1
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_1wi3g")
 autoplay = true
 bus = &"Music"
 
 [connection signal="death_finished" from="Hero" to="." method="_on_hero_death_finished"]
+[connection signal="summoned_satellites" from="Hero" to="." method="_on_hero_summoned_satellites"]
