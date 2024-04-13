@@ -10,7 +10,7 @@ radius = 0.25
 
 [node name="Satellite" type="Area3D"]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_lo0a5")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
@@ -19,3 +19,5 @@ material = SubResource("StandardMaterial3D_73ipg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_x84og")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

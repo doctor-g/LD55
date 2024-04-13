@@ -16,3 +16,7 @@ func _physics_process(delta: float) -> void:
 		satellite_2.angle = PI
 		add_child(satellite_2)
 
+
+
+func damage() -> void:
+	print("OUCH")

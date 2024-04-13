@@ -9,3 +9,9 @@ func _physics_process(delta: float) -> void:
 	angle = fmod(angle + SPEED * delta, TAU)
 	position.x = sin(angle)
 	position.z = cos(angle)
+
+
+func _on_body_entered(body: Node3D) -> void:
+	# Only enemies can trigger this, so damage them and remove the satellite
+	body.damage()
+	queue_free()

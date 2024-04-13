@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dh5hoos1cp7mn"]
+[gd_scene load_steps=7 format=3 uid="uid://dh5hoos1cp7mn"]
 
 [ext_resource type="PackedScene" uid="uid://chgdlfcyb06pk" path="res://hero.tscn" id="1_ejil5"]
+[ext_resource type="PackedScene" uid="uid://b77yhh5ub87hw" path="res://enemy.tscn" id="2_83wmn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r76qj"]
 
@@ -27,3 +28,7 @@ material = SubResource("StandardMaterial3D_mi4xh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_00kh6")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_83wmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -8)
+target = NodePath("../Hero")
