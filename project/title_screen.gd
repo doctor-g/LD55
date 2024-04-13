@@ -10,3 +10,12 @@ func _on_play_button_pressed() -> void:
 
 func _on_label_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(meta)
+
+
+func _on_splash_splash_dismissed() -> void:
+	$Music.play()
+	await create_tween().tween_property($Splash, "modulate:a", 0, 0.5).finished
+	$Splash.queue_free()
+	$MainUI.visible = true
+	$MainUI.modulate.a = 0
+	create_tween().tween_property($MainUI, "modulate:a", 1, 0.5)

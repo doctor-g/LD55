@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbg8pjxj65ugo"]
+[gd_scene load_steps=12 format=3 uid="uid://dbg8pjxj65ugo"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_v3u0h"]
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="1_xvgeh"]
 [ext_resource type="FontFile" uid="uid://cdlpr4pdum1mc" path="res://Kanit-Regular.ttf" id="3_blncy"]
 [ext_resource type="Script" path="res://nucleus.gd" id="4_87fgo"]
 [ext_resource type="AudioStream" uid="uid://bqg76s5cr45cf" path="res://title.ogg" id="5_6wsy1"]
+[ext_resource type="Script" path="res://splash.gd" id="6_pdxpg"]
 
 [sub_resource type="Theme" id="Theme_27kyf"]
 default_font = ExtResource("1_xvgeh")
@@ -52,7 +53,8 @@ _data = {
 [node name="TitleScreen" type="Node3D"]
 script = ExtResource("1_v3u0h")
 
-[node name="UI" type="Control" parent="."]
+[node name="MainUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_27kyf")
 
-[node name="TitleLabel" type="Label" parent="UI"]
+[node name="TitleLabel" type="Label" parent="MainUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -79,7 +81,7 @@ theme_override_constants/outline_size = 12
 text = "Orbitals"
 horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="UI"]
+[node name="PlayButton" type="Button" parent="MainUI"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 1
@@ -96,7 +98,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Play"
 
-[node name="Label" type="RichTextLabel" parent="UI"]
+[node name="Label" type="RichTextLabel" parent="MainUI"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -116,7 +118,7 @@ fit_content = true
 autowrap_mode = 0
 meta_underlined = false
 
-[node name="Overlay" type="ColorRect" parent="UI"]
+[node name="Overlay" type="ColorRect" parent="MainUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,15 +148,44 @@ radius = 0.25
 material = SubResource("StandardMaterial3D_m6axt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../UI")
+root_node = NodePath("../MainUI")
 libraries = {
 "": SubResource("AnimationLibrary_utjhk")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Splash" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_pdxpg")
+
+[node name="ClickInstructions" type="Label" parent="Splash"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -39.0
+offset_right = 191.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_blncy")
+theme_override_font_sizes/font_size = 32
+text = "Click to begin"
+horizontal_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_6wsy1")
-autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="meta_clicked" from="UI/Label" to="." method="_on_label_meta_clicked"]
+[connection signal="pressed" from="MainUI/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="meta_clicked" from="MainUI/Label" to="." method="_on_label_meta_clicked"]
+[connection signal="gui_input" from="Splash" to="Splash" method="_on_gui_input"]
+[connection signal="splash_dismissed" from="Splash" to="." method="_on_splash_splash_dismissed"]
