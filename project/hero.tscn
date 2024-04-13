@@ -28,3 +28,9 @@ shape = SubResource("SphereShape3D_f57xk")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
 [node name="Satellites" type="Node3D" parent="."]
+
+[node name="ChargesLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 71.0
+offset_bottom = 23.0
+text = "Charges: "
