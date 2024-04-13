@@ -44,6 +44,8 @@ func _physics_process(_delta: float) -> void:
 		var satellite_2 := SATELLITE_SCENE.instantiate()
 		satellite_2.angle = PI
 		_satellites.add_child(satellite_2)
+		
+		$SummonSound.play()
 
 
 func charge() -> void:
@@ -51,6 +53,7 @@ func charge() -> void:
 		return
 	
 	charges += 1
+	$PickupSound.play()
 
 
 func damage() -> void:
@@ -59,10 +62,12 @@ func damage() -> void:
 	
 	if _shell != null:
 		%ShellParticles.emitting = true
+		$ShatterSound.play()
 		_shell.queue_free()
 	else:
 		alive = false
 		$AnimationPlayer.play("death")
+		$GameOverSound.play()
 
 
 func _update_charges_label() -> void:

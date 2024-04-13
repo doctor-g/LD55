@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjjkt74nm2526"]
+[gd_scene load_steps=6 format=3 uid="uid://cjjkt74nm2526"]
 
 [ext_resource type="Script" path="res://enemy_explosion.gd" id="1_5j7mq"]
+[ext_resource type="AudioStream" uid="uid://jf2captudddr" path="res://enemy_explosion.wav" id="2_q0x3x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sv062"]
 vertex_color_use_as_albedo = true
@@ -30,5 +31,9 @@ angular_velocity_max = 5.0
 scale_amount_curve = SubResource("Curve_17gr0")
 color = Color(1, 0.2, 0.0823529, 1)
 script = ExtResource("1_5j7mq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_q0x3x")
+autoplay = true
 
 [connection signal="finished" from="." to="." method="_on_finished"]
