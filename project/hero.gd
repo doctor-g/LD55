@@ -27,9 +27,11 @@ func _ready() -> void:
 	_update_score_label()
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not alive:
 		return
+		
+	$Heart.rotate_y(delta*0.1)
 	
 	var direction := Input.get_vector("move_left", "move_right", "move_down", "move_up")
 	var vector := Vector3(direction.x, 0, -direction.y).normalized()

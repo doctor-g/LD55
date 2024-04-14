@@ -13,6 +13,7 @@ collision_mask = 5
 script = ExtResource("1_ewhv8")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+smooth_faces = false
 material = SubResource("StandardMaterial3D_qmdme")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

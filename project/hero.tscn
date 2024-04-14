@@ -123,10 +123,12 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 script = ExtResource("1_8uykj")
 
 [node name="Shell" type="CSGSphere3D" parent="."]
+smooth_faces = false
 material = SubResource("StandardMaterial3D_ymwut")
 
 [node name="Heart" type="CSGSphere3D" parent="."]
 radius = 0.35
+smooth_faces = false
 material = SubResource("StandardMaterial3D_25d3w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
