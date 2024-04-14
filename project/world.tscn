@@ -30,9 +30,10 @@ normal_texture = SubResource("NoiseTexture2D_aehfj")
 heightmap_texture = SubResource("NoiseTexture2D_wow6l")
 
 [sub_resource type="Environment" id="Environment_00kh6"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.866667, 0.905882, 0.878431, 1)
-reflected_light_source = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tuge0"]
 size = Vector3(1, 10, 1000)
@@ -129,6 +130,9 @@ horizontal_alignment = 1
 stream = ExtResource("5_1wi3g")
 autoplay = true
 bus = &"Music"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.321737, 0.946829, 0, -0.946829, 0.321737, 0, 13.282, 0)
 
 [connection signal="death_finished" from="Hero" to="." method="_on_hero_death_finished"]
 [connection signal="summoned_satellites" from="Hero" to="." method="_on_hero_summoned_satellites"]
