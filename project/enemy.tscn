@@ -1,9 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b77yhh5ub87hw"]
+[gd_scene load_steps=3 format=3 uid="uid://b77yhh5ub87hw"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_ewhv8"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmdme"]
-albedo_color = Color(0.737255, 0.0196078, 0, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_r06a5"]
 
@@ -11,11 +8,6 @@ albedo_color = Color(0.737255, 0.0196078, 0, 1)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_ewhv8")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-visible = false
-smooth_faces = false
-material = SubResource("StandardMaterial3D_qmdme")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_r06a5")
