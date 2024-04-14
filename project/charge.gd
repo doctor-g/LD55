@@ -5,8 +5,9 @@ const LERP_SPEED := 0.2
 var target_position : Vector3
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position = lerp(global_position, target_position, LERP_SPEED)
+	$Nucleus.rotate_y(TAU * delta)
 
 
 func _on_body_entered(body: Node3D) -> void:
