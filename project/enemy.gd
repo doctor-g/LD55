@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const DELTA_TOWARD := 3.0
 const CHARGE_DROP_DISTANCE := 3.0
+const ROTATION_SPEED := -0.7 * TAU
 
 ## Speed increase per second
 const ACCELERATION := 0.5
@@ -12,6 +13,8 @@ const ACCELERATION := 0.5
 var _direction := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
+	rotate_y(ROTATION_SPEED * delta)
+	
 	speed += ACCELERATION * delta
 	
 	if target != null and target.alive:

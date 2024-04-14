@@ -12,8 +12,12 @@ This game is licensed under the [GNU General Public License](LICENSE)
 
 Created using [Godot Engine](https://godotengine.org/) ([License info](https://godotengine.org/license/))
 
-This project uses [Godot Little Camera Preview](https://github.com/anthonyec/godot_little_camera_preview),
-&copy;2024 Anthony Cossins, under [the Expat license](https://github.com/anthonyec/godot_little_camera_preview/blob/main/LICENSE)
+This project uses the following additional open source code:
+
+- [Godot Little Camera Preview](https://github.com/anthonyec/godot_little_camera_preview),
+&copy;2024 Anthony Cossins, is used under [the Expat license](https://github.com/anthonyec/godot_little_camera_preview/blob/main/LICENSE).
+- [coi-serviceworker](https://github.com/gzuidhof/coi-serviceworker), &copy; 2021 Guido Zuidhof, is used
+inder [the Expat license](https://github.com/gzuidhof/coi-serviceworker/blob/master/LICENSE).
 
 ## Third-Party Assets
 
