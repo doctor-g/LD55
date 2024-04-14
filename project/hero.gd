@@ -79,6 +79,8 @@ func damage() -> void:
 		_shell.queue_free()
 	else:
 		alive = false
+		for satellite in _satellites.get_children():
+			satellite.disconnect_from_nucleus()
 		$AnimationPlayer.play("death")
 		$GameOverSound.play()
 

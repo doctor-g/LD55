@@ -22,6 +22,11 @@ func _physics_process(delta: float) -> void:
 		var collision := move_and_collide(_direction * speed * delta)
 		if collision != null and collision.get_collider() == target:
 			target.damage()
+			
+			var explosion := preload("res://enemy_explosion.tscn").instantiate()
+			add_sibling(explosion)
+			explosion.global_position = global_position
+			
 			queue_free()
 
 
