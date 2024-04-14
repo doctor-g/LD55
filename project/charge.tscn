@@ -29,4 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.162, 0, 0)
 radius = 0.1
 material = SubResource("StandardMaterial3D_606t2")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Nucleus"]
+light_color = Color(0.137255, 0.682353, 0, 1)
+light_energy = 4.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

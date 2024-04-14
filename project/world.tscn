@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dh5hoos1cp7mn"]
+[gd_scene load_steps=17 format=3 uid="uid://dh5hoos1cp7mn"]
 
 [ext_resource type="PackedScene" uid="uid://chgdlfcyb06pk" path="res://hero.tscn" id="1_ejil5"]
 [ext_resource type="Script" path="res://world.gd" id="1_fbrej"]
@@ -7,14 +7,28 @@
 [ext_resource type="FontFile" uid="uid://vciwig5ix68c" path="res://RussoOne-Regular.ttf" id="4_h8po8"]
 [ext_resource type="AudioStream" uid="uid://cikl83523lp5p" path="res://theme.ogg" id="5_1wi3g"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_r76qj"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_adrkj"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eabn0"]
-noise = SubResource("FastNoiseLite_r76qj")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_60rus"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_adrkj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewtt4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wow6l"]
+noise = SubResource("FastNoiseLite_ewtt4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8yru2"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aehfj"]
+noise = SubResource("FastNoiseLite_8yru2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mi4xh"]
 albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
-albedo_texture = SubResource("NoiseTexture2D_eabn0")
+albedo_texture = SubResource("NoiseTexture2D_60rus")
+normal_texture = SubResource("NoiseTexture2D_aehfj")
+heightmap_texture = SubResource("NoiseTexture2D_wow6l")
 
 [sub_resource type="Environment" id="Environment_00kh6"]
 ambient_light_source = 2
@@ -35,7 +49,7 @@ spawn_rate = ExtResource("2_1fin0")
 [node name="Hero" parent="." instance=ExtResource("1_ejil5")]
 
 [node name="Background" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.0459, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(1000, 1, 1000)
 material = SubResource("StandardMaterial3D_mi4xh")
 

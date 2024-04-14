@@ -76,9 +76,11 @@ func damage() -> void:
 	if _shell != null:
 		%ShellParticles.emitting = true
 		$ShatterSound.play()
+		%HeartLight.visible = true
 		_shell.queue_free()
 	else:
 		alive = false
+		%HeartLight.visible = false
 		for satellite in _satellites.get_children():
 			satellite.disconnect_from_nucleus()
 		$AnimationPlayer.play("death")
