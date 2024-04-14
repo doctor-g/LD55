@@ -2,7 +2,7 @@
 
 [Play now!](https://doctor-g.github.io/LD55/)
 
-Made for Ludum Dare 55 with the theme &ldquo;Summoning&rdquo;
+Made for [Ludum Dare 55](https://ldjam.com/events/ludum-dare/55/) with the theme &ldquo;Summoning.&rdquo; More information can be found on [the _Orbitals_ Ludum Dare page](https://ldjam.com/events/ludum-dare/55/orbitals).
 
 ## Legal
 
