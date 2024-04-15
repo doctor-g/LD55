@@ -31,7 +31,9 @@ func disconnect_from_nucleus() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	# Only enemies can trigger this, so damage them and remove the satellite
-	body.damage(self)
-	hit_enemy.emit()
-	queue_free()
+	if body is Enemy:
+		body.damage(self)
+		hit_enemy.emit()
+		queue_free()
+	else:
+		push_error("Unexpected collision with %s" % str(body))

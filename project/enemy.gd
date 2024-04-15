@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Enemy extends CharacterBody3D
 
 const DELTA_TOWARD := 3.0
 const CHARGE_DROP_DISTANCE := 3.0
